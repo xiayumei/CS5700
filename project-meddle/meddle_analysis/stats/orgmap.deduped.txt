@@ -1,0 +1,119 @@
+AS15169 Google Inc. 5004848
+AS36408 CDNetworks Inc. 184888
+AS16509 Amazon.com, Inc. 178192
+AS20940 Akamai International B.V. 134329
+AS6185 Apple Inc. 92722
+AS4134 Chinanet 70273
+AS714 Apple Inc 59231
+AS32934 Facebook, Inc. 49781
+AS22822 Limelight Networks, INC. proxy AS object 43287
+AS4436 nLayer Communications, Inc. 41471
+AS9304 Hutchison Global Communications 38366
+AS43515 YOUTUBE YOUTUBE 23187
+AS156 Northeastern University 11596
+AS4808 CNCGROUP IP network China169 Beijing Province Network 9810
+AS23724 IDC, China Telecommunications Corporation 8035
+AS55163 LinkedIn Corporation 6689
+AS4837 CNCGROUP China169 Backbone 6498
+AS14618 Amazon.com, Inc. 6040
+AS20049 LinkedIn Corporation 5667
+AS132203 Tencent Building, Kejizhongyi Avenue 5356
+AS4809 China Telecom Next Generation Carrier Network 4690
+AS4812 China Telecom (Group) 4549
+AS6939 Hurricane Electric, Inc. 4467
+AS16625 Akamai Technologies European AS 4271
+AS15003 Nobis Technology Group, LLC 3891
+AS3786 LG DACOM Corporation 3604
+AS37963 Hangzhou Alibaba Advertising Co.,Ltd. 3481
+AS3491 Beyond The Network America, Inc. 2709
+AS4835 China Telecom (Group) 2586
+AS2914 NTT America, Inc. 2295
+AS6461 MFN - Metromedia Fiber Network 1532
+AS26496 GoDaddy.com, LLC 1238
+AS36459 GitHub, Inc. 1093
+AS54600 PEGTECHINC - PEG TECH INC 967
+AS174 Cogent/PSI 789
+AS56040 China Mobile communications corporation 530
+AS19679 Dropbox, Inc. 528
+AS2516 KDDI KDDI CORPORATION 521
+AS15133 EdgeCast Networks, Inc. 502
+AS7922 Comcast Cable Communications, Inc. 481
+AS4847 China Networks Inter-Exchange 433
+AS3356 Level 3 Communications 411
+AS13335 CloudFlare, Inc. 408
+AS8001 Net Access Corporation 407
+AS10794 Bank of America 355
+AS2828 XO Communications 351
+AS42260 ALKAN GRUP TURIZM ISLETMELERI A.S. 340
+AS38283 CHINANET SiChuan Telecom Internet Data Center 333
+AS19994 Rackspace Hosting 321
+AS17623 China Unicom Shenzen network 310
+AS1273 Cable and Wireless Worldwide plc 309
+AS38365 Beijing Baidu Netcom Science and Technology Co., Ltd. 296
+AS17816 China Unicom IP network China169 Guangdong province 293
+AS3257 Tinet SpA 273
+AS11643 eBay, Inc 254
+AS58461 No.288,Fu-chun Road 235
+AS26101 Yahoo! 210
+AS1239 SprintLink Global Network 209
+AS209 NOVARTIS-DMZ-US 205
+AS8928 Interoute Communications Limited 199
+AS13768 Peer 1 Network (USA) Inc. 175
+AS53580 MARKETO - MARKETO 172
+AS7415 Integral Ad Science, Inc. 170
+AS24134 CNLink Networks Ltd. 148
+AS32244 Liquid Web, Inc. 136
+AS40000 Noblis, Inc. 116
+AS17621 China Unicom Shanghai network 116
+AS54113 Fastly 100
+AS29791 Voxel Dot Net, Inc. 84
+AS12168 Mirror Image Internet, Inc. 81
+undefined 73
+AS786 JISC Collections And Janet Limited 67
+AS7105 Dow Jones & Company, Inc. 64
+AS30081 CacheNetworks, Inc. 54
+AS29990 AppNexus, Inc 52
+AS23093 HEALTH MARKETS 50
+AS6453 TATA Communications 49
+AS55967 Beijing Baidu Netcom Science and Technology Co., Ltd. 45
+AS32787 Prolexic Technologies, Inc. 45
+AS15224 Omniture, Inc 40
+AS17920 Ultra Serve Internet Pty Ltd - Transit AS - Hosting Provider, 39
+AS17233 AT&T Enhanced Network Services 37
+AS26163 Datagram, Inc. 36
+AS4269 California Education and Research Federation Network 35
+AS22279 Aggregate Knowledge Inc. 35
+AS1299 TeliaSonera International Carrier 33
+AS9808 Guangdong Mobile Communication Co.Ltd. 32
+AS23650 AS Number for CHINANET jiangsu province backbone 31
+AS14745 Internap Network Services Corporation 30
+AS15395 Rackspace Ltd. 30
+AS2635 Automattic, Inc 28
+AS17638 ASN for TIANJIN Provincial Net of CT 27
+AS24400 Shanghai Mobile Communications Co.,Ltd. 24
+AS38019 tianjin Mobile Communication Company Limited 24
+AS20223 CareerBuilder, LLC 24
+AS13414 Twitter Inc. 19
+AS38107 CDNetworks 16
+AS14173 PHOTOBUCKET.COM, INC. 16
+AS24706 Kriter Internet Hiz.Ltd.Sti. 16
+AS36351 SoftLayer Technologies Inc. 14
+AS19795 Silverpop Systems Inc. 14
+AS54253 Eloqua Corporation 14
+AS6165 Uptilt, Inc. 13
+AS8075 Microsoft Corporation 13
+AS1668 AOL Transit Data Network 12
+AS33070 Rackspace Hosting 10
+AS132591 Tencent AS num for global network 8
+AS46887 Lightower Fiber Networks (LIGHT-141) 8
+AS32400 Hostway Services, Inc. 7
+AS22606 ExactTarget, Inc. 7
+AS7859 pair Networks 7
+AS26347 New Dream Network, LLC 6
+AS21844 ThePlanet.com Internet Services, Inc. 6
+AS23352 Server Central Network 6
+AS11377 SendGrid, Inc. 6
+AS32977 CareerBuilder, LLC 6
+AS19893 RagingWire Telecommunications 5
+AS42807 Aerotek Bilisim Taahhut Sanayi ve Ticaret Limited Sirketi 2
+AS38478 SunnyVision Limited 1

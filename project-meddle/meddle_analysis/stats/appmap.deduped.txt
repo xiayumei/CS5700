@@ -1,0 +1,12 @@
+google apps 5004848
+apple apps 151953
+Amazon.com 98116
+Facebook 49781
+LinkedIn 7583
+tencent QQ/WeChat 5517
+baidu apps 825
+Dropbox 528
+Yahoo.com 210
+adobe reader 40
+Twitter 19
+weibo 18

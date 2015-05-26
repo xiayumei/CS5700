@@ -1,0 +1,2 @@
+This is only a placeholder for the experiment2 out directory, since git never stage an empty directory.
+But we need this directory to be staged so that the program would not crash. Never delete me!

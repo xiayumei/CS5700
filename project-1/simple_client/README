@@ -1,0 +1,71 @@
+# README
+
+This is the manual for project 1 (Simple Client)
+
+Team Name: enzen
+Team Memeber:
+Yingquan Yuan (NUID: 001176107)
+Zhongjie Mao (NUID: 001954575)
+
+This project is implemented using C. We implemented the SSL supports with
+OpenSSL library, which is already installed on CCIS Linux machine.
+
+================================================================================
+
+Makefile
+
+The project root directory is simple_client.
+
+Run 'make build' or simply 'make' would build the whole project. All built
+objects goes into the ./target directory. We created a symbolic link 'client'
+to ./target/executable at the root directory for execution. The executing
+command line is exactly following the instruction.
+
+Run 'make clean' would clean the 'client' executable and the whole ./target
+directory.
+
+Run 'make test' would kick off an integration testing script 'test.sh' in the
+./test directory, which would run the 'client' 4 times based on generic/SSL
+connection and our 2 team members' NUID respectively. You can also manually
+kick off the testing script for standalone testing, and it will automatically
+look up the 'client' executable regardless which directory you are in.
+
+Run 'make all' would trigger clean, build, test in order.
+
+================================================================================
+
+secret_flags
+
+We obtained all the 4 secret_flags, the arrangement of them in the file is:
+
+"""
+Yingquan Yuan's secret_flags got through general connection
+Yingquan Yuan's secret_flags got through SSL connection
+Zhongjie Mao's secret_flags got through general connection
+Zhongjie Mao's secret_flags got through SSL connection
+"""
+
+===============================================================================
+
+The Design
+
+We carefully designed and arranged the code and project structure to make
+our code "DRY" enough.
+
+In ./src directory:
+client.c
+This is the main entry of the client program, containing arguments parsing and
+all control logic.
+
+common.h (common.c)
+They contain all the shared public functions and global variables and Macros
+used by generic and SSL connection.
+
+generic.h (generic.c)
+They contain all the functions implementing the generic connection.
+
+ssl.h (ssl.c)
+They contain all the functions implementing the ssl features.
+
+===============================================================================
+

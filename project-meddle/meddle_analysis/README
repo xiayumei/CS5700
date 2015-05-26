@@ -1,0 +1,245 @@
+# README
+
+This is the manual for project meddle, I use an iPhone, and usually I like
+to watch videos on YouTube, so during the 13 days' data collection, I got
+more than 14GB pcap data, which really took me a lot of time to process them.
+
+All the scripts I added or revised are located in ./src directory while all
+the rest origin scripts provided by the project is located in ./origin_scripts
+directory.
+
+Team Member:
+Yingquan Yuan (NUID: 001176107)
+
+===============================================================================
+
+Methodology
+
+Task 1
+I added a bunch of new scripts, the names and calling order are listed below,
+the ip_to_identity.sh is one of the existing scripts, but I totally changed it
+to fit for my processing:
+
+sites_contacted.sh
+    |
+    |---- statsip.py
+    |
+    |---- mergeipstats.py
+
+ip_to_identity.sh (ip_to_identity_with_web_service.sh)
+
+identity_to_app.py
+
+My thought behind the scripts is that each contacted site by my iPhone has
+a public IP address, and usually an app would contact the sites or server
+belong to it vendor. If we can identify the vendor or company of an IP
+address, we can inversely identify which app or apps contacted this IP
+address, because they belong to the same vendor. Although this cannot apply
+to many apps belonging to the same vendor, but roughly, we can get the
+statistics saying "how many sites were contacted by the Google apps or
+Apple ones?"
+
+Besides the sites can be mapped to apps on my iPhone, I can also measure
+how many sites got contacted by my iPhone, but I don't have an apps corresponds
+to the sites or its company. This could be very interesting because we can get
+certain insight into which companies or organizations actually carries most
+of the mobile traffic.
+
+As an assumption, I assume that some famous world class cloud machines and
+CDN providers such as Amazon and Akamai must also take considerable mobile
+traffic, although I did not install any apps provided by them.
+
+
+The basic work flow of my processing of task 1 is as below:
+
+sites_contacted.sh:
+1. Use tshark to decompress and parse the pcap files one by one, and this is
+   done in sites_contacted.sh.
+2. For each decompressed pcap file, grep all the outgoing IP packets, get the
+   source and dest IP address, this is done in sites_contacted.sh.
+3. Passing the preliminary grep result to the statsip.py script, where the
+   Python script only picks up valid source and dest IP address. Here 'valid'
+   means the source IP must be the device VPN IP address while the dest must
+   be a public IP. The Python script statsip.py would dump a statistics dict
+   in such format <dest_ip, count> for each pcap file, where count is the
+   visiting count of the corresponding IP address from my iPhone.
+4. After iterating all pcap files, I can get a very long dict with many
+   duplicated key (dest_ip), then we can call the Python script mergeipstats.py
+   to dedupe the dict based on dest IP address, and sum up the visit count.
+5. Finally, sort the deduped <dest_ip, count> dict.
+
+ip_to_identity.sh (ip_to_identity_with_web_service.sh)
+I replaced the existing content in this script to get more precise whois messge.
+Since I use several popular Chinese apps such as Tencent QQ/WeChat,renren and
+weibo, but the default 'whois' query results come from ARIN's database, which
+usually use the top level ISPs' name to describe the OrgName field of those
+Asia sites instead of the real vendors or companies. I need more precise
+description from the APNIC's database, so that I customized the script to let
+it try ARIN first, if the result OrgName is too vague, it will retry with APNIC.
+Once done with the whois query, I found there is actually a better alternative:
+'http://ipinfo.io/', a web service providing REST API for fast IP <-> Company
+query. The advantage is that the service is faster than whois and provides
+more accurate IP owner information. The disadvantage is that there is rate
+limit for this service if you want it free, that one host can only send 1000
+requests per day. I wrote the alternative script in ip_to_identity_with_web_service.sh
+and ran it in several machines, so as to bring in more accurate IP information.
+
+identity_to_app.sh
+Finally, this script will take the result of the ip_to_identity.sh script above,
+and try to map each company mapped from the dest IP address to an app in my
+iPhone. The mapping procedure is simple, I defined an <keyword, appname> map
+in the script, and if the keyword appears in the company's name, I can determine
+which app or apps could be linked up.
+
+
+Task 2
+
+For task 2, I added 1 script 'grepall.sh' as a simple wrapper of grepForStuff.sh,
+which looks up all pcap files and process them with grepForStuff.sh one by one.
+
+I revised the grepForStuff.sh script, mainly changing the regex inside it to
+capture more PII, such as some of my account name, email address, contact and
+regex representing my password (Of course I removed this part when submitting, :) ).
+
+The result of grepall.sh is 1 result file per origin pcap file, so that the result
+is still messy, then there is a second regex grep to all the result files of
+the first step, and the result would be aggregated into a single file.
+
+===============================================================================
+
+Answer Questions
+
+I attached 3 statistics result files with the project submission, all of them
+are in 'meddle_analysis/stats' directory, where 'appmap.deduped.txt' and
+'orgmap.deduped.txt' corresponds to Task 1 while 'pii.grep' corresponds to
+Task2, all of them are generated by my scripts.
+
+Task 1
+
+How many sites are contacted by each app that you use?
+For app level statistics, I located the number of sites contacted by the apps
+below:
+    google apps 5004848
+    apple apps 151953
+    Amazon.com 98116
+    Facebook 49781
+    LinkedIn 7583
+    tencent QQ/WeChat 5517
+    baidu apps 825
+    Dropbox 528
+    Yahoo.com 210
+    adobe reader 40
+    Twitter 19
+    weibo 18
+These are copied from './stats/appmap.deduped.txt' and they are what I can
+determined app traffic because there is at least one corresponding app installed
+in my iPhone.
+Besides, there is also a statistics file 'orgmap.deduped.txt' in the 'stats'
+directory, and it contains how many times of all recognizable organizations
+contacted by my iPhone. Please refer to it separately because I cannot paste
+it here due to its size, the result has been sorted.
+
+Does that traffic seem legitimate?
+The traffic in 'appmap.deduped.txt' seems both reasonable and legitimate, for
+example, most of the apps in my iPhone are generic Apple products or provided
+by Google such as Gmail. Also an iPhone uses much network resources provided
+by Apple such as Facetime and iMessage while Google is one the biggest network
+providers in the world, so Google and Apple apps takes most of the traffic in
+my iPhone. When it refers to Dropbox, although it is a popular mobile app, but
+it is more functional, only using the app could trigger a site contact, so that
+is why it takes a comparative lower traffic.
+As for those traffic in 'orgmap.deduped.txt', there are some sites with very
+few contact times, and I have never know about them, such as 'SunnyVision Limited',
+but after randomly Google search several of them, I found most of them are
+regional data centers or network resource providers. Therefore, I can conclude
+that the vast majority of my mobile traffic is legitimate.
+
+
+Is there anything surprising in your data?
+To some extent, there are 2 things surprised me.
+1. I have already known that Akamai is the world's largest CDN provider, but
+   from my mobile traffic measurement, it seems that CDNetworks Inc. acts
+   as the biggest traffic carrier among all the CDN providers, and it takes
+   27.3% more traffic than Akamai. I am not sure if this is only an occasion
+   in my iPhone, but it shows that CDNetworks can take considerables mobile
+   traffic or at least it takes more traffic than other CDNs for certain
+   mobile apps.
+
+2. Before getting the traffic measurement, I thought the reason I got so much
+   tcpdump data (more 14GB) is obvious, because I am used to watching videos
+   on YouTube using my iPhone. However, the measurement shows that I only
+   have 23187 times site contact to explicit YouTube sites, which count a little
+   of the whole traffic. Although the traffic to Google ranks the first, but
+   for IP location, I believe the registrar has made differentiation between
+   YouTube sites and Google sites. Now the scenario is that YouTube must take
+   most of my mobile traffic because there is rare kind of network traffic could
+   compare with video transmission in data amount, but so much video traffic
+   did not incur too many sites contact to YouTube. I can foresee 2 reasons,
+   the first one is the transmission method of streaming media, where a client
+   media player can begin playing the data before the entire file has been
+   transmitted, so that it does not need to contact the sites request by request.
+   The second reason might be that some CDNs helped to storing and transmitting
+   YouTube videos for YouTube sites themselves, which decreased the times of
+   direct sites contact from my iPhone to YouTube.
+
+Interesting question:
+Is it possible that CDNetworks helped a lot for distributing YouTube video?
+
+
+Task 2
+
+I grep many credit card like numbers, such as 5447751069344973, but after
+looking up the sequence at the content of the tcpdump file, I found most of
+them are part of the tracecode in the HTTP headers, such as:
+    tracecode: 20354477510693449738030705
+Therefore, I would like to believe there is no or at least rare credit card
+information leak in the traffic of a mobile device.
+
+Besides, I found that there are many occurrence of my plaintext personal
+website address and email address, even in the binary tcpdump files. I tried
+to decode the tcpdump file with tshark, and finally found that these information
+occurs in the Secure Sockets Layer fields inside the TCP segments. Since my
+personal website has an HTTPS certificate, and we all know SSL/TLS is implemented
+in layer 4, and the email address is necessary for the handshake with a certificate.
+Since the SSL/TLS handshake message should be encrypted, and it should have been
+invisible in the tcpdump raw message, but I cannot understand why it appears
+very readable in the tcpdump files, although they are not very sensitive
+message for me.
+
+Finally, the thing I found which can be called a leak is my backup email
+address: 626889760@qq.com, the number sequence inside which is issued by the
+biggest Chinese IM software, Tencent QQ, and it is also a user's unique
+identifier. This identifier is a plaintext field in some HTTP headers:
+    Set-Cookie: qqmail_alias=626889760@qq.com; Domain=.mail.qq.com; Path=/
+I have to point out that this could sometime becomes a vulnerability of an
+user account, since there are many online cheating and phishing based on
+a QQ identifier, and it would be better to put the identifier into the POST
+content.
+
+===============================================================================
+
+Makefile
+
+You can replay the whole experiment and measurement I made to get the data
+through running the Makefile.
+
+Run 'make statsip' would kick off the 'sites_contacted.sh' script, and
+this script will call subsequent script 'statsip.py' and 'mergeipstats.py'
+to finish the IP address based statistics on sites contacted.
+
+Run 'make maporgs' would kick off the 'ip_to_identity.sh' script which maps
+IP addresses to org names, this script basically uses 'whois' for querying
+org name.
+
+Similarly, run 'make maporgs-ws' kicks off the 'ip_to_identity_with_web_service.py'
+script, instead of 'ip_to_identity.py', this script use the 'ipinfo.io' web
+service for querying.
+
+Run 'make mapapps' kicks off the 'identity_to_app.py' script to map org names
+to mobile app names, it also output an extra file containing an sorted org
+to contact count list.
+
+Run 'make grepstuff' kicks off the 'grepall.sh' script to grep PII in all
+the tcpdump files.
+
+===============================================================================

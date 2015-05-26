@@ -1,0 +1,55 @@
+# genral
+*~
+.DS_Store
+*ropeproject/
+
+# project 1
+*.o
+*.so
+*.a
+*target/
+client
+
+# project 2
+*.pyc
+*log
+webcrawler
+
+# project 3
+*.aux
+*.log
+*.pdf
+*.gz
+*.tclc
+*.tr
+*.dat
+*.fig
+*.eps
+
+# project4
+rawhttpget
+
+# project meddle
+tcpdump
+httpdata.txt
+nohup*
+output*
+
+# project5
+.project
+.pydevproject
+.settings
+deploy.sh
+run.sh
+stop.sh
+reset.sh
+id_rsa
+id_rsa.pub
+blocks
+locations
+db_geoip
+dnsserver
+httpserver
+deployCDN
+runCDN
+stopCDN

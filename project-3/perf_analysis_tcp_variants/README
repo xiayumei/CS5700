@@ -1,0 +1,55 @@
+# README
+
+This is the manual for project 3 (Performance Analysis of TCP Variants)
+
+Team Name: enzen
+Team Member:
+Yingquan Yuan (NUID: 001176107)
+Zhongjie Mao (NUID: 001954575)
+
+
+The final paper is the pdf under the project root directory.
+
+===============================================================================
+
+Makefile
+
+The project root directory is perf_analysis_tcp_variants.
+
+Run 'make exp1/exp2/exp3' would run experiment1, experiment2 and experiment3
+respectively. Running an experiment includes running the tcl script to do the
+simulation, and then run a Python script to do analysis to the output trace
+file. The analysis results would be save to 'out' directory for plotting.
+
+Run 'make expall' would run experiment 1, 2, 3 respectively.
+
+Run 'make plot' would kick off gnuplot to plot the analysis result for each
+experiment, note that you need run the experiments to get the data before
+plotting, or gnuplot would complain about there is no data for plotting. Since
+we use LaTeX to make the paper, so what gnuplot generates is an eps picture
+and with a LaTeX postscript, instead of jpg/png. The plotting files would be
+placed under 'paper' directory for LaTeX compilation usage.
+
+Run 'make' would kick off pdflatex to generate the whole paper. 'make' depends
+on 'make plot'.
+
+===============================================================================
+
+Project Directory Layout
+
+ns2: contains all the tcl simulation scripts.
+
+process: contains all the Python analysis scripts.
+
+plot: contains all the gnuplot scripts.
+
+paper: contains all LaTeX files for the final paper.
+
+out: a placeholder for the experiments output data files.
+
+All functional operations are controlled by the Makefile.
+Note that you may not make the plotting successfully, because we did not
+submit the plotting data. To make the plotting and paper by yourself, you
+need to run the 3 experiments first.
+
+===============================================================================

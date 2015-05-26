@@ -1,0 +1,95 @@
+# README
+
+This is the manual for project 2 (Web Crawler)
+
+Team Name: enzen
+Team Member:
+Yingquan Yuan (NUID: 001176107)
+Zhongjie Mao (NUID: 001954575)
+
+This project is implemented using Python2.7. All the Python modules we used
+only refer to string or regex parsing, socket, timing, logging, and basic 
+Python data structures such as deque and set.
+
+===============================================================================
+
+Makefile
+
+The project root directory is web_crawler.
+
+Since it is a Python project, the Makefile does not have too much coomplex
+build rules.
+
+Run 'make' would create a symbolic link 'webcrawler' under the root directory,
+which is linking to the executable Python script (webcrawler.py) in the ./src
+directory.
+
+Run 'make clean' would purge the executable link 'webcrawler' as well as all
+compiled .pyc files under ./src directory.
+
+Run 'make test' would kick off an integration testing script 'test.sh' in the
+./test directory, which would run the webcrawler certain times based on the
+username and password of our 2 team members.
+
+Run 'make all' would trigger clean, build, test in order.
+
+===============================================================================
+
+secret_flags
+
+We obtained all the 10 secret_flags for our 2 team members, the arrangement of
+them in the file is:
+"""
+Yingquan Yuan's (001176107) 5 secret_flags
+Zhongjie Mao's (001954575) 5 secret_flags
+"""
+
+===============================================================================
+
+The Design
+
+The mandatory Python modules:
+
+A socket-based web crawler should consist of at least 3 required modules:
+
+HttpClient.py: A simple HTTP client wrapping socket I/O and providing the Crawler
+               HTTP-like request/response communication with fakebook;
+
+HttpParser.py: A text parser parsing HTTP packets, including HTTP headers and
+               DOM elements;
+
+Crawler.py: A Crawler class implementing the breadth-first search algorithm, so
+            that it can traverse a graph of web pages efficiently. Particularly,
+            it is good that the Crawler class is independent to the HTTP client
+            it used.
+
+From a decoupling perspective, an HTTP parser should be used by both the HTTP
+client and the Crawler, so that the relation between a parser and a Crawler/
+HttpClient would be composition. In practice, we added a parser field for both
+the Crawler class and HttpClient.
+
+A Crawler should have an HttpClient for communicating, and considering we are
+implementing the HttpClient in a socket level, we can determine that a specific
+HttpClient implementation could serve for a single HTTP host. So our HttpClient
+works for the host of fakebook, which is cs5700.ccs.neu.edu. A Crawler should
+not depend on a specific HttpClient instance since it should be able to crawl
+any specified sites, so that we passed in the Crawler a client parameter during
+its initialization. And next time we can pass it with another client not for
+the fakebook site.
+
+
+The rest helper Python modules:
+
+webcrawler.py: The main entry of the Web Crawler
+
+logger.py: A simple Python logger for logging messages in different severity
+           levels. The default settings is in ERROR level while the output
+           stream is the stdout, so that only when the Crawler is down, an
+           error message is logged to stdout.
+
+utils.py: A Python module providing shared and easily used util classes and
+          functions. Currently we only added a Timer class for recording the
+          timing issues of the Crawler.
+
+===============================================================================
+
